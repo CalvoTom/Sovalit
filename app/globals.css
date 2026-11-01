@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* Charte Sovalit (maquette Figma) : Givre · Acier · Electrik — Sora · Montserrat */
+@theme {
+  --color-givre: #f5f6fa;
+  --color-givre-2: #eceef5;
+  --color-acier: #5a6078;
+  --color-ink: #1d2133;
+  --color-electrik: #0079e0;
+  --color-electrik-dark: #0063b8;
+  --color-electrik-soft: #e3f0fc;
+  --color-electrik-light: #6bb6ff;
+
+  --font-title: var(--font-sora), system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-soft: 0 1px 2px rgb(29 33 51 / 0.04), 0 12px 40px -12px rgb(29 33 51 / 0.12);
+  --shadow-blue: 0 16px 40px -12px rgb(0 121 224 / 0.55);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-scroll-dot: scroll-dot 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scroll-dot {
+    0% { transform: translateY(0); opacity: 1; }
+    70% { transform: translateY(14px); opacity: 0; }
+    100% { opacity: 0; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-[17px] leading-relaxed text-acier antialiased max-sm:text-base;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4, h5 {
+    @apply font-title text-ink tracking-tight;
+    line-height: 1.08;
+  }
+  ::selection {
+    @apply bg-electrik text-white;
+  }
+  :focus-visible {
+    @apply outline-3 outline-offset-3 outline-electrik;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6;
+  }
+  .h2 {
+    @apply text-[clamp(2.1rem,4.6vw,3.6rem)] font-bold tracking-[-0.03em];
+  }
+  .section {
+    @apply py-[clamp(90px,12vw,160px)];
+  }
+  /* Grand « C » décoratif tiré du logo */
+  .brand-ring {
+    @apply pointer-events-none absolute aspect-square rounded-full border-solid;
+  }
+}

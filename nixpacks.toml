@@ -1,0 +1,7 @@
+# Utilisé par Dokploy si le type de build est « Nixpacks ».
+[variables]
+NIXPACKS_NODE_VERSION = "22"
+NEXT_TELEMETRY_DISABLED = "1"
+
+[start]
+cmd = "npm run start"
