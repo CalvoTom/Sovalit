@@ -7,6 +7,8 @@ import { TechLogos } from "@/components/ui/tech-logos";
 import { Photo } from "@/components/ui/photo";
 import { photos } from "@/lib/photos";
 
+const hasPhoto = Boolean(photos.hero.src);
+
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
@@ -28,12 +30,20 @@ export function Hero() {
       </div>
 
       <motion.div {...enter(0.25)} className="px-3 sm:px-4">
-        <div className="relative isolate flex h-[72svh] max-h-[760px] min-h-[480px] flex-col justify-end overflow-hidden rounded-[28px] md:rounded-[36px]">
-          <Photo photo={photos.hero} sizes="100vw" priority className="-z-10" />
-          <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(16_20_36/0.7),rgb(16_20_36/0.15)_45%,transparent_70%)]" />
+        <div
+          className={`relative isolate flex flex-col justify-end overflow-hidden rounded-[28px] md:rounded-[36px] ${
+            hasPhoto ? "h-[72svh] max-h-[760px] min-h-[480px]" : "bg-ink pt-10"
+          }`}
+        >
+          {hasPhoto && (
+            <>
+              <Photo photo={photos.hero} sizes="100vw" priority className="-z-10" />
+              <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(16_20_36/0.7),rgb(16_20_36/0.15)_45%,transparent_70%)]" />
+            </>
+          )}
           <div className="shell flex flex-col gap-6 pb-6 md:flex-row md:items-end md:justify-between md:pb-8">
             <div className="text-white/85">
-              <p className="mb-3 text-sm text-white/65">Technologies utilisées au quotidien</p>
+              <p className="mb-3 text-sm text-white/60">Technologies utilisées au quotidien</p>
               <TechLogos className="max-w-[640px]" />
             </div>
             <a

@@ -70,7 +70,16 @@ export function Services() {
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute inset-0"
                   >
-                    <Photo photo={photos[s.id as ServiceId]} sizes="(min-width: 1024px) 60vw, 100vw" />
+                    {photos[s.id].src ? (
+                      <Photo photo={photos[s.id]} sizes="(min-width: 1024px) 60vw, 100vw" />
+                    ) : (
+                      <div className="flex h-full flex-col justify-end p-8 sm:p-12">
+                        <p className="font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-ink">{s.title}</p>
+                        <ul className="mt-6 grid gap-2 text-ink/80">
+                          {s.points.map((p) => <li key={p}>{p}</li>)}
+                        </ul>
+                      </div>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

@@ -10,10 +10,12 @@ export function Process() {
         title="Une méthode en quatre temps, sans effet tunnel."
         aside="On se parle, on se voit, on avance ensemble. Chaque étape se termine par quelque chose que vous pouvez tester et valider."
       />
-      <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] sm:aspect-[5/4] lg:aspect-auto lg:min-h-[640px]">
-          <Photo photo={photos.method} sizes="(min-width: 1024px) 50vw, 100vw" />
-        </div>
+      <div className={`grid gap-10 lg:gap-16 ${photos.method.src ? "lg:grid-cols-2" : ""}`}>
+        {photos.method.src && (
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] sm:aspect-[5/4] lg:aspect-auto lg:min-h-[640px]">
+            <Photo photo={photos.method} sizes="(min-width: 1024px) 50vw, 100vw" />
+          </div>
+        )}
         <ol className="flex flex-col border-t border-line">
           {steps.map((s, i) => (
             <li key={s.title} className="grid grid-cols-[4.5rem_1fr] gap-4 border-b border-line py-8 lg:flex-1 lg:content-center">

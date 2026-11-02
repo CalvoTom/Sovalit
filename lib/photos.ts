@@ -5,11 +5,11 @@
  */
 export type Photo = { src: string | null; alt: string; credit?: { name: string; url: string } };
 
-export const photos = {
+export const photos: Record<"hero" | "method" | "web" | "mobile" | "tools" | "ai", Photo> = {
   hero: { src: null, alt: "" },
   method: { src: null, alt: "" },
   web: { src: null, alt: "" },
   mobile: { src: null, alt: "" },
   tools: { src: null, alt: "" },
   ai: { src: null, alt: "" },
-} satisfies Record<string, Photo>;
+};
