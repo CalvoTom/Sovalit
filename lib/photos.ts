@@ -5,8 +5,7 @@
  */
 export type Photo = { src: string | null; alt: string; credit?: { name: string; url: string } };
 
-export const photos: Record<"hero" | "method" | "web" | "mobile" | "tools" | "ai", Photo> = {
-  hero: { src: null, alt: "" },
+export const photos: Record<"method" | "web" | "mobile" | "tools" | "ai", Photo> = {
   method: { src: null, alt: "" },
   web: { src: null, alt: "" },
   mobile: { src: null, alt: "" },
