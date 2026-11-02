@@ -53,7 +53,7 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4">
       <div
-        className={`mx-auto flex max-w-[860px] items-center justify-between gap-4 rounded-full bg-white/75 p-1.5 pl-3 ring-1 ring-ink/[0.06] backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-500 ${
+        className={`mx-auto flex max-w-[860px] items-center justify-between gap-4 rounded-full bg-white/75 p-1.5 pl-4 ring-1 ring-ink/[0.06] backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-500 ${
           scrolled ? "shadow-[0_16px_40px_-16px_rgb(26_31_51/0.3)]" : "shadow-[0_8px_24px_-16px_rgb(26_31_51/0.2)]"
         }`}
       >
