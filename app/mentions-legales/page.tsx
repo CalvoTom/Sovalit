@@ -6,8 +6,9 @@ export const metadata: Metadata = { title: "Mentions légales", alternates: { ca
 // Les champs entre crochets sont à compléter avec les informations officielles de l'entreprise.
 export default function MentionsLegales() {
   return (
-    <section className="container-site max-w-3xl pt-40 pb-24 [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_p]:mb-3">
-      <h1 className="text-[clamp(2.4rem,5vw,3.6rem)] font-bold">Mentions légales</h1>
+    <section className="shell pt-36 pb-24">
+      <div className="max-w-3xl [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-2xl [&_p]:mb-3">
+      <h1 className="text-title">Mentions légales</h1>
 
       <h2>Éditeur du site</h2>
       <p>Sovalit — [forme juridique] au capital de [montant] €</p>
@@ -28,6 +29,7 @@ export default function MentionsLegales() {
 
       <h2>Cookies</h2>
       <p>Ce site n&apos;utilise aucun cookie de suivi ou publicitaire.</p>
+      </div>
     </section>
   );
 }

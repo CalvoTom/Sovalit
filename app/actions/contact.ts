@@ -18,7 +18,7 @@ function rateLimited(ip: string) {
 
 export async function sendContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
   // Champ piège invisible : rempli uniquement par les robots
-  if (formData.get("website")) return { status: "success", message: "Merci, votre demande a bien été envoyée." };
+  if (formData.get("website")) return { status: "success", message: "Vous recevrez une réponse sous 24 h à l'adresse indiquée." };
 
   const parsed = contactSchema.safeParse({
     name: formData.get("name"),
@@ -33,18 +33,18 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
       const key = issue.path[0] as keyof NonNullable<ContactState["errors"]>;
       if (key && !errors[key]) errors[key] = issue.message;
     }
-    return { status: "error", message: "Merci de vérifier les champs indiqués.", errors };
+    return { status: "error", message: "Certains champs sont à corriger.", errors };
   }
 
   const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (rateLimited(ip)) {
-    return { status: "error", message: "Trop de demandes envoyées. Réessayez dans quelques minutes." };
+    return { status: "error", message: "Trop de demandes envoyées depuis cette connexion. Réessayez dans 10 minutes." };
   }
 
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO_EMAIL } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
     console.error("[contact] SMTP non configuré : définissez SMTP_HOST, SMTP_USER et SMTP_PASS.");
-    return { status: "error", message: `L'envoi est momentanément indisponible. Écrivez-nous à ${site.email}.` };
+    return { status: "error", message: `L'envoi par formulaire n'est pas disponible. Écrivez directement à ${site.email}.` };
   }
 
   const d = parsed.data;
@@ -72,8 +72,8 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
     });
   } catch (err) {
     console.error("[contact] Échec de l'envoi :", err);
-    return { status: "error", message: `L'envoi a échoué. Réessayez ou écrivez-nous à ${site.email}.` };
+    return { status: "error", message: `La demande n'a pas pu être envoyée. Réessayez, ou écrivez à ${site.email}.` };
   }
 
-  return { status: "success", message: "Merci ! Votre demande a bien été envoyée. Je vous réponds sous 24 h." };
+  return { status: "success", message: "Vous recevrez une réponse sous 24 h à l'adresse indiquée." };
 }

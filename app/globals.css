@@ -1,34 +1,32 @@
 @import "tailwindcss";
 
-/* Charte Sovalit (maquette Figma) : Givre · Acier · Electrik — Sora · Montserrat */
+/*
+  Sovalit — tokens
+  Couleurs de la charte Figma (Givre, Acier, Electrik) + une encre tirée de l'Acier.
+  Sora pour les titres (police de marque), Hanken Grotesk pour le texte.
+*/
 @theme {
+  --color-paper: #ffffff;
   --color-givre: #f5f6fa;
-  --color-givre-2: #eceef5;
+  --color-line: #e3e6ee;
   --color-acier: #5a6078;
-  --color-ink: #1d2133;
+  --color-mute: #8a90a6;
+  --color-ink: #1a1f33;
   --color-electrik: #0079e0;
-  --color-electrik-dark: #0063b8;
-  --color-electrik-soft: #e3f0fc;
-  --color-electrik-light: #6bb6ff;
+  --color-electrik-deep: #0061b5;
+  --color-sky: #cfe3f7;
 
-  --font-title: var(--font-sora), system-ui, sans-serif;
-  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
 
-  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
-  --shadow-soft: 0 1px 2px rgb(29 33 51 / 0.04), 0 12px 40px -12px rgb(29 33 51 / 0.12);
-  --shadow-blue: 0 16px 40px -12px rgb(0 121 224 / 0.55);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --animate-marquee: marquee 38s linear infinite;
-  --animate-scroll-dot: scroll-dot 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-
-  @keyframes marquee {
-    to { transform: translateX(-50%); }
-  }
-  @keyframes scroll-dot {
-    0% { transform: translateY(0); opacity: 1; }
-    70% { transform: translateY(14px); opacity: 0; }
-    100% { opacity: 0; }
-  }
+  --text-display: clamp(2.75rem, 6.4vw, 5.75rem);
+  --text-display--line-height: 0.98;
+  --text-title: clamp(2rem, 4vw, 3.5rem);
+  --text-title--line-height: 1.04;
+  --text-statement: clamp(1.75rem, 3.4vw, 3rem);
+  --text-statement--line-height: 1.12;
 }
 
 @layer base {
@@ -38,18 +36,19 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-white font-sans text-[17px] leading-relaxed text-acier antialiased max-sm:text-base;
+    @apply bg-paper font-sans text-[17px] leading-[1.6] text-acier antialiased;
     overflow-x: clip;
+    font-feature-settings: "ss01", "cv11";
   }
-  h1, h2, h3, h4, h5 {
-    @apply font-title text-ink tracking-tight;
-    line-height: 1.08;
+  h1, h2, h3, h4 {
+    @apply font-display font-semibold text-ink;
+    letter-spacing: -0.035em;
   }
   ::selection {
     @apply bg-electrik text-white;
   }
   :focus-visible {
-    @apply outline-3 outline-offset-3 outline-electrik;
+    @apply outline-2 outline-offset-2 outline-electrik;
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -61,18 +60,16 @@
   }
 }
 
-@layer components {
-  .container-site {
-    @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6;
-  }
-  .h2 {
-    @apply text-[clamp(2.1rem,4.6vw,3.6rem)] font-bold tracking-[-0.03em];
-  }
-  .section {
-    @apply py-[clamp(90px,12vw,160px)];
-  }
-  /* Grand « C » décoratif tiré du logo */
-  .brand-ring {
-    @apply pointer-events-none absolute aspect-square rounded-full border-solid;
-  }
+@utility shell {
+  @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+}
+
+/* Ouverture / fermeture des réponses de la FAQ (Radix Accordion) */
+@keyframes expand {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes collapse {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
 }

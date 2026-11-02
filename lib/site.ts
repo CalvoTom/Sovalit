@@ -4,9 +4,9 @@
 export const site = {
   name: "Sovalit",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sovalit.com",
-  title: "Sovalit — Produits digitaux, outils internes & IA sur mesure",
+  title: "Sovalit — Produits digitaux, outils internes et IA sur mesure",
   description:
-    "Sovalit conçoit et développe vos produits digitaux sur mesure : sites vitrines, applications mobiles privées, outils internes et solutions data & IA.",
+    "Sovalit conçoit et développe vos produits digitaux sur mesure : sites vitrines, applications mobiles privées, outils internes et solutions data et IA.",
   email: "contact@sovalit.com",
   phone: "+33 6 52 93 64 84",
   phoneHref: "tel:+33652936484",
@@ -14,89 +14,68 @@ export const site = {
 
 export const nav = [
   { href: "/#services", label: "Services" },
-  { href: "/#data", label: "Data & IA" },
+  { href: "/#data", label: "Data et IA" },
   { href: "/#methode", label: "Méthode" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/#faq", label: "Questions" },
 ] as const;
 
-export type ServiceArt = "web" | "mobile" | "tools" | "data";
+export type ServiceId = "web" | "mobile" | "tools" | "ai";
 
-export const services: {
-  num: string;
-  title: string;
-  text: string;
-  tags: string[];
-  art: ServiceArt;
-  accent?: boolean;
-}[] = [
+export const services: { id: ServiceId; title: string; text: string; points: string[] }[] = [
   {
-    num: "01",
+    id: "web",
     title: "Sites vitrines",
-    text: "Un site rapide, élégant et bien référencé, qui présente votre activité et transforme vos visiteurs en clients.",
-    tags: ["Design sur mesure", "SEO", "CMS", "Performance"],
-    art: "web",
+    text: "Un site rapide et bien référencé, qui explique clairement ce que vous faites et donne envie de vous contacter.",
+    points: ["Design sur mesure", "Référencement naturel", "Contenus modifiables par vos soins"],
   },
   {
-    num: "02",
+    id: "mobile",
     title: "Applications mobiles privées",
-    text: "Des apps iOS & Android réservées à vos équipes ou à vos clients : terrain, commerciaux, suivi, réservation…",
-    tags: ["iOS & Android", "Hors ligne", "Distribution privée"],
-    art: "mobile",
+    text: "Des apps iOS et Android réservées à vos équipes ou à vos clients, distribuées sans passer par une publication publique.",
+    points: ["Fonctionne hors connexion", "iOS et Android", "Distribution privée"],
   },
   {
-    num: "03",
+    id: "tools",
     title: "Outils internes",
-    text: "Back-offices, CRM, portails, automatisations : des outils pensés pour vos process, qui font gagner des heures chaque semaine.",
-    tags: ["Back-office", "Intégrations API", "Workflows"],
-    art: "tools",
+    text: "Back-offices, suivi de devis, portails clients : des outils taillés pour vos process, branchés sur ceux que vous utilisez déjà.",
+    points: ["Remplace les tableurs partagés", "Connexion à vos logiciels", "Droits par utilisateur"],
   },
   {
-    num: "04",
-    title: "Data, IA & Machine Learning",
-    text: "Valorisez vos données : tableaux de bord, modèles prédictifs, assistants IA branchés sur vos documents et vos outils.",
-    tags: ["Dashboards", "ML", "LLM & RAG"],
-    art: "data",
-    accent: true,
+    id: "ai",
+    title: "Data et IA",
+    text: "Des assistants qui répondent à partir de vos documents, des prévisions fiables, des tâches répétitives automatisées.",
+    points: ["Assistants sur vos documents", "Modèles prédictifs", "Hébergement en Europe possible"],
   },
 ];
 
-export const marquee = [
-  "Sites vitrines",
-  "Applications mobiles",
-  "Outils internes",
-  "Tableaux de bord",
-  "Machine learning",
-  "IA générative",
-  "Automatisation",
+export const commitments = [
+  { title: "Un seul interlocuteur", text: "La personne qui vous écoute est celle qui conçoit et développe." },
+  { title: "Un prix fixé d'avance", text: "Un devis au forfait, détaillé, validé avant le premier jour." },
+  { title: "Le code vous appartient", text: "Sources, données et accès vous sont remis. Sans dépendance." },
+  { title: "Un suivi dans la durée", text: "Maintenance, corrections et évolutions après la mise en ligne." },
 ];
 
 export const dataUseCases = [
-  { title: "Pilotage & dashboards", text: "Vos indicateurs clés centralisés, fiables et à jour automatiquement." },
-  { title: "Modèles prédictifs", text: "Prévision des ventes, scoring, détection d'anomalies, maintenance prédictive." },
-  { title: "Assistants IA sur mesure", text: "Des LLM connectés à vos documents et à vos outils, en toute confidentialité." },
-  { title: "Automatisation intelligente", text: "Extraction de documents, classification, traitement des tâches répétitives." },
+  { title: "Prévoir", text: "Ventes, stocks, charge de travail : des prévisions qui s'appuient sur votre historique." },
+  { title: "Retrouver", text: "Un assistant qui répond à partir de vos contrats, procédures et fiches produits, sources à l'appui." },
+  { title: "Automatiser", text: "Lecture de factures, tri des emails, saisie : les tâches répétitives passent en arrière-plan." },
+  { title: "Piloter", text: "Un tableau de bord unique, mis à jour tout seul, avec les chiffres qui comptent vraiment." },
 ];
 
 export const steps = [
-  { title: "Cadrage", text: "On échange sur vos objectifs, vos contraintes et vos utilisateurs. Vous recevez une proposition claire, chiffrée et planifiée." },
-  { title: "Design", text: "Maquettes interactives et parcours utilisateurs : vous validez le produit avant la moindre ligne de code." },
-  { title: "Développement", text: "Livraisons régulières que vous pouvez tester. Vous suivez l'avancement en continu, sans effet tunnel." },
-  { title: "Lancement & suivi", text: "Mise en production, formation de vos équipes, maintenance et évolutions dans la durée." },
-];
-
-export const reasons = [
-  { title: "Interlocuteur unique", text: "Du premier appel à la mise en ligne, une seule personne qui connaît votre projet par cœur." },
-  { title: "100 % sur mesure", text: "Pas de template recyclé : chaque produit est conçu autour de vos besoins réels." },
-  { title: "Vous êtes propriétaire", text: "Le code, les données et les accès vous appartiennent. Aucune dépendance cachée." },
-  { title: "Pensé pour durer", text: "Technologies éprouvées, code documenté, sécurité et performance dès le départ." },
+  { title: "Cadrage", text: "Un premier échange pour comprendre vos objectifs et vos contraintes. Vous recevez un devis détaillé." },
+  { title: "Maquettes", text: "Vous voyez et testez le produit sur des maquettes interactives avant qu'il soit développé." },
+  { title: "Développement", text: "Des versions livrées régulièrement, que vous essayez au fil de l'eau." },
+  { title: "Mise en ligne", text: "Lancement, prise en main par vos équipes, puis maintenance et évolutions." },
 ];
 
 export const faq = [
-  { q: "Combien coûte un projet ?", a: "Chaque projet est chiffré sur mesure après un premier échange gratuit. Vous recevez un devis détaillé, au forfait, avant tout engagement." },
-  { q: "Quels sont les délais ?", a: "Comptez généralement 2 à 4 semaines pour un site vitrine, et de 1 à 4 mois pour une application ou un outil métier selon sa complexité." },
-  { q: "Qu'est-ce qu'une application mobile « privée » ?", a: "Une application distribuée uniquement à vos collaborateurs ou à vos clients, sans publication publique sur les stores. Idéal pour les outils métier." },
+  { q: "Combien coûte un projet ?", a: "Chaque projet est chiffré après un premier échange gratuit. Vous recevez un devis au forfait, détaillé par étape, avant tout engagement." },
+  { q: "Quels sont les délais ?", a: "Comptez en général 2 à 4 semaines pour un site vitrine, et 1 à 4 mois pour une application ou un outil métier selon sa complexité." },
+  { q: "Qu'est-ce qu'une application mobile privée ?", a: "Une application installée uniquement par vos collaborateurs ou vos clients, sans être publiée publiquement sur les stores. C'est idéal pour les outils de terrain." },
   { q: "Mes données restent-elles confidentielles ?", a: "Oui. Les solutions IA peuvent être hébergées en Europe ou sur votre propre infrastructure, et vos données ne servent jamais à entraîner des modèles tiers." },
-  { q: "Assurez-vous la maintenance après la livraison ?", a: "Oui, des formules de maintenance et d'évolution sont proposées pour garder votre produit sécurisé, à jour et en phase avec votre croissance." },
+  { q: "Pouvez-vous reprendre un projet existant ?", a: "Oui, après un audit du code et de l'hébergement. Vous saurez précisément ce qui peut être conservé, amélioré ou refait." },
+  { q: "Assurez-vous la maintenance ?", a: "Oui. Des formules de maintenance gardent votre produit sécurisé et à jour, et permettent de le faire évoluer avec votre activité." },
 ];
 
-export const needs = ["Site vitrine", "Application mobile", "Outil interne", "Data / IA"] as const;
+export const needs = ["Site vitrine", "Application mobile", "Outil interne", "Data et IA"] as const;

@@ -1,41 +1,39 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 
-type Variant = "primary" | "ghost" | "light";
+type Variant = "ink" | "paper" | "electrik";
 
-const base =
-  "group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-title font-semibold transition-all duration-400 ease-out-expo hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-60";
-
-const variants: Record<Variant, string> = {
-  primary: "bg-electrik text-white shadow-blue hover:bg-electrik-dark",
-  ghost: "bg-white text-ink ring-[1.5px] ring-inset ring-givre-2 hover:ring-acier",
-  light: "bg-white text-electrik hover:shadow-[0_16px_40px_-12px_rgb(0_0_0/0.35)]",
+const styles: Record<Variant, { btn: string; chip: string }> = {
+  ink: { btn: "bg-ink text-white hover:bg-[#262c45]", chip: "bg-white text-ink" },
+  paper: { btn: "bg-white text-ink hover:bg-givre", chip: "bg-ink text-white" },
+  electrik: { btn: "bg-electrik text-white hover:bg-electrik-deep", chip: "bg-white text-electrik" },
 };
 
-const sizes = { md: "px-7 py-4 text-base", sm: "px-5 py-[11px] text-[0.92rem]" };
-
-export function buttonClass(variant: Variant = "primary", size: keyof typeof sizes = "md", extra = "") {
-  return `${base} ${variants[variant]} ${sizes[size]} ${extra}`;
+export function buttonClass(variant: Variant = "ink", extra = "") {
+  return `group inline-flex h-12 items-center gap-3 rounded-full pr-1.5 pl-5 text-[0.95rem] font-medium whitespace-nowrap transition-colors duration-300 disabled:pointer-events-none disabled:opacity-60 ${styles[variant].btn} ${extra}`;
 }
 
-export function ButtonArrow() {
-  return <ArrowRight aria-hidden className="size-4 transition-transform duration-400 ease-out-expo group-hover:translate-x-1" />;
+/** Pastille ronde avec flèche, qui pivote au survol. */
+export function ButtonChip({ variant = "ink" }: { variant?: Variant }) {
+  return (
+    <span aria-hidden className={`grid size-9 place-items-center rounded-full ${styles[variant].chip}`}>
+      <ArrowUpRightIcon weight="bold" className="size-4 transition-transform duration-300 ease-out-expo group-hover:rotate-45" />
+    </span>
+  );
 }
 
 type LinkButtonProps = Omit<ComponentProps<typeof Link>, "className"> & {
   variant?: Variant;
-  size?: keyof typeof sizes;
-  arrow?: boolean;
   className?: string;
   children: ReactNode;
 };
 
-export function LinkButton({ variant, size, arrow, className = "", children, ...props }: LinkButtonProps) {
+export function LinkButton({ variant = "ink", className = "", children, ...props }: LinkButtonProps) {
   return (
-    <Link className={buttonClass(variant, size, className)} {...props}>
+    <Link className={buttonClass(variant, className)} {...props}>
       {children}
-      {arrow && <ButtonArrow />}
+      <ButtonChip variant={variant} />
     </Link>
   );
 }

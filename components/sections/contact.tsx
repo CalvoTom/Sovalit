@@ -1,36 +1,32 @@
+import { EnvelopeSimpleIcon, PhoneIcon } from "@phosphor-icons/react/dist/ssr";
 import { site } from "@/lib/site";
-import { Reveal } from "@/components/ui/reveal";
 import { ContactForm } from "./contact-form";
 
 export function Contact() {
   return (
-    <section id="contact" className="scroll-mt-24 px-2 pb-[clamp(60px,8vw,100px)] sm:px-4">
-      <div className="relative mx-auto grid max-w-[1280px] gap-10 overflow-hidden rounded-[28px] bg-ink p-[clamp(28px,7vw,88px)] text-white/70 md:grid-cols-2 md:gap-16 md:rounded-[40px]">
-        <div aria-hidden className="brand-ring -bottom-[420px] -left-[300px] w-[640px] -rotate-[35deg] border-[110px] border-electrik border-t-transparent" />
-        <Reveal className="relative">
-          <h2 className="h2 mb-6 text-white">
-            Prêt à passer
-            <br />
-            au niveau supérieur&nbsp;?
-          </h2>
-          <p className="max-w-[28rem] text-[1.1rem]">
-            Parlez-moi de votre projet. Je vous réponds sous 24&nbsp;h avec une première analyse, sans engagement.
+    <section id="contact" className="scroll-mt-8 px-3 pb-3 sm:px-4 sm:pb-4">
+      <div className="grid gap-12 rounded-[28px] bg-givre px-5 py-16 sm:px-8 md:rounded-[36px] md:py-24 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:px-16">
+        <div className="lg:pt-4">
+          <h2 className="max-w-[12ch] text-title">Parlons de votre projet.</h2>
+          <p className="mt-6 max-w-[40ch] text-[1.05rem]">
+            Décrivez votre besoin en quelques lignes. Vous recevez sous 24 h une première analyse et une proposition de
+            rendez-vous, sans engagement.
           </p>
-          <div className="mt-10 grid gap-3">
+          <ul className="mt-10 grid gap-3">
             {[
-              { label: "Téléphone", value: site.phone, href: site.phoneHref },
-              { label: "Email", value: site.email, href: `mailto:${site.email}` },
-            ].map((c) => (
-              <a key={c.label} href={c.href} className="flex flex-col font-title text-[1.4rem] font-semibold text-white transition-colors hover:text-electrik-light">
-                <span className="font-sans text-[0.8rem] font-medium tracking-[0.1em] text-white/50 uppercase">{c.label}</span>
-                {c.value}
-              </a>
+              { icon: PhoneIcon, label: site.phone, href: site.phoneHref },
+              { icon: EnvelopeSimpleIcon, label: site.email, href: `mailto:${site.email}` },
+            ].map(({ icon: Icon, label, href }) => (
+              <li key={href}>
+                <a href={href} className="inline-flex items-center gap-3 font-display text-xl font-medium text-ink transition-colors hover:text-electrik">
+                  <span className="grid size-10 place-items-center rounded-full bg-white ring-1 ring-line"><Icon className="size-[18px]" /></span>
+                  {label}
+                </a>
+              </li>
             ))}
-          </div>
-        </Reveal>
-        <Reveal delay={0.1} className="relative">
-          <ContactForm />
-        </Reveal>
+          </ul>
+        </div>
+        <ContactForm />
       </div>
     </section>
   );

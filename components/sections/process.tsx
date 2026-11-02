@@ -1,33 +1,31 @@
 import { steps } from "@/lib/site";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Process() {
   return (
-    <section id="methode" className="section scroll-mt-24">
-      <div className="container-site">
-        <Reveal className="mb-16 max-w-[720px]">
-          <Eyebrow>Méthode</Eyebrow>
-          <h2 className="h2">
-            Simple, transparent,
-            <br />
-            sans mauvaise surprise.
-          </h2>
-        </Reveal>
-        <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s, i) => (
-            <Reveal as="li" key={s.title} delay={i * 0.08}
-              className="rounded-[20px] bg-white px-7 pt-8 pb-9 ring-[1.5px] ring-inset ring-givre-2 transition-all duration-400 ease-out-expo hover:-translate-y-1 hover:ring-electrik"
-            >
-              <span className="mb-7 grid size-[52px] place-items-center rounded-full bg-electrik-soft font-title text-[1.2rem] font-bold text-electrik">
-                {i + 1}
-              </span>
-              <h3 className="mb-2.5 text-[1.35rem] font-semibold">{s.title}</h3>
-              <p className="text-[0.95rem]">{s.text}</p>
-            </Reveal>
-          ))}
-        </ol>
-      </div>
+    <section id="methode" className="shell scroll-mt-8 py-28 md:py-40">
+      <SectionHeading
+        title="Une méthode en quatre temps, sans effet tunnel."
+        aside="Chaque étape se termine par quelque chose que vous pouvez voir, tester et valider avant de passer à la suivante."
+      />
+      <ol className="grid grid-cols-2 gap-x-3 gap-y-10 lg:grid-cols-4">
+        {steps.map((s, i) => (
+          <li key={s.title}>
+            {/* Escalier : chaque étape démarre un cran plus bas que la précédente */}
+            <div className="relative h-44 overflow-hidden rounded-2xl border border-line bg-[repeating-linear-gradient(135deg,transparent_0_7px,#eef0f5_7px_8px)] sm:h-60">
+              <div
+                className="absolute inset-x-0 flex h-11 items-center bg-ink px-4 text-sm font-medium text-white"
+                style={{ top: `calc(${i} * (100% - 2.75rem) / 3)` }}
+              >
+                {s.title}
+              </div>
+            </div>
+            <p className="mt-4 text-sm text-mute">Étape {i + 1}</p>
+            <h3 className="mt-1 mb-2 text-xl tracking-[-0.02em]">{s.title}</h3>
+            <p className="max-w-[32ch] text-[0.95rem]">{s.text}</p>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

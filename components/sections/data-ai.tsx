@@ -1,41 +1,35 @@
-import { ArrowRight } from "lucide-react";
 import { dataUseCases } from "@/lib/site";
-import { Eyebrow } from "@/components/ui/eyebrow";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { LinkButton } from "@/components/ui/button";
-import { Reveal } from "@/components/ui/reveal";
+import { ForecastChart } from "@/components/mockups/forecast-chart";
 
 export function DataAI() {
   return (
-    <section id="data" className="section relative scroll-mt-24 overflow-hidden bg-electrik text-white/85">
-      <div aria-hidden className="brand-ring -bottom-[520px] -left-[380px] w-[900px] -rotate-30 border-[150px] border-white/[0.07] border-t-transparent" />
-      <div className="container-site relative grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-[72px]">
-        <Reveal>
-          <Eyebrow light>Expertise Data & IA</Eyebrow>
-          <h2 className="h2 mb-6 text-white">Vos données ont des choses à dire. On les fait parler.</h2>
-          <p className="mb-9 max-w-[32rem] text-[1.1rem]">
-            L&apos;IA n&apos;est utile que si elle résout un vrai problème. Grâce à une expertise approfondie en data science et
-            en machine learning, je vous aide à identifier les cas d&apos;usage qui ont un impact réel, puis à les mettre en
-            production.
-          </p>
-          <LinkButton href="/#contact" variant="light" arrow>
-            Explorer un cas d&apos;usage
-          </LinkButton>
-        </Reveal>
-        <ul className="grid gap-3.5">
-          {dataUseCases.map((u, i) => (
-            <Reveal as="li" key={u.title} delay={i * 0.08}
-              className="flex items-start gap-[18px] rounded-[20px] bg-white/10 px-[26px] py-6 ring-1 ring-inset ring-white/15 transition-colors hover:bg-white/15"
-            >
-              <span className="grid size-9 flex-none place-items-center rounded-full bg-white text-electrik">
-                <ArrowRight className="size-4" aria-hidden />
-              </span>
-              <div>
-                <h3 className="mb-1 text-[1.12rem] font-semibold tracking-[-0.01em] text-white">{u.title}</h3>
-                <p className="text-[0.95rem]">{u.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
+    <section id="data" className="scroll-mt-8 px-3 sm:px-4">
+      <div className="rounded-[28px] bg-ink py-24 text-white/70 md:rounded-[36px] md:py-32">
+        <div className="shell">
+          <SectionHeading
+            light
+            title="Vos données savent déjà beaucoup de choses."
+            aside="Une expertise en data science et en machine learning, mise au service de problèmes concrets. On commence par le cas d'usage, jamais par la technologie."
+          />
+          <div className="grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-16">
+            <ForecastChart />
+            <div>
+              <dl className="grid sm:grid-cols-2">
+                {dataUseCases.map((u) => (
+                  <div key={u.title} className="border-t border-white/10 py-6 sm:pr-6">
+                    <dt className="mb-1.5 font-display text-xl font-semibold tracking-[-0.02em] text-white">{u.title}</dt>
+                    <dd className="text-[0.95rem]">{u.text}</dd>
+                  </div>
+                ))}
+              </dl>
+              <LinkButton href="/#contact" variant="paper" className="mt-6">
+                Étudier un cas d&apos;usage
+              </LinkButton>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
