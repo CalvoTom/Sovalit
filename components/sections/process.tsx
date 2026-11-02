@@ -12,7 +12,7 @@ export function Process() {
       />
       <div className={`grid gap-10 lg:gap-16 ${photos.method.src ? "lg:grid-cols-2" : ""}`}>
         {photos.method.src && (
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] sm:aspect-[5/4] lg:aspect-auto lg:min-h-[640px]">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-givre sm:aspect-[5/4] lg:aspect-auto lg:min-h-[640px]">
             <Photo photo={photos.method} sizes="(min-width: 1024px) 50vw, 100vw" />
           </div>
         )}
