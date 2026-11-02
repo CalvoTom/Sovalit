@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { LinkButton } from "@/components/ui/button";
 import { TechLogos } from "@/components/ui/tech-logos";
+import { HeroNotch } from "./hero-notch";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -15,11 +16,8 @@ export function Hero() {
   return (
     <section className="px-3 pt-[72px] sm:px-4 sm:pt-20 lg:pt-4">
       <div className="relative isolate flex min-h-[620px] flex-col gap-16 overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#9cc4ee_0%,#bcd8f4_45%,#d6e7f8_100%)] md:min-h-[680px] md:rounded-[36px]">
-        {/* Encoche dans laquelle se loge la navigation (grand écran) */}
-        <div aria-hidden className="absolute top-0 left-1/2 hidden h-16 w-[884px] -translate-x-1/2 rounded-b-[28px] bg-paper lg:block">
-          <span className="absolute top-0 -left-7 size-7 bg-[radial-gradient(circle_at_0_100%,transparent_27.5px,var(--color-paper)_28px)]" />
-          <span className="absolute top-0 -right-7 size-7 bg-[radial-gradient(circle_at_100%_100%,transparent_27.5px,var(--color-paper)_28px)]" />
-        </div>
+        {/* Encoche dans laquelle se loge la navigation (grand écran), animée au défilement */}
+        <HeroNotch />
         <div className="shell pt-12 md:pt-16 lg:pt-32">
           <motion.h1 {...enter(0.05)} className="max-w-[14ch] text-[clamp(2.5rem,6vw,5.25rem)] leading-[1] tracking-[-0.045em] text-balance">
             Le digital qui fait grandir votre entreprise.

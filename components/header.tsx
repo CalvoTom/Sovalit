@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRightIcon, ListIcon, XIcon } from "@phosphor-icons/react";
 import { nav } from "@/lib/site";
 import { Logo } from "@/components/ui/logo";
+import { NOTCH_CLOSE_DISTANCE } from "@/components/sections/hero-notch";
 
 const ids = nav.map((n) => n.href.replace("/#", ""));
 
@@ -37,7 +38,8 @@ export function Header() {
   const active = useActiveSection();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    // L'ombre apparaît quand l'encoche du hero s'est refermée
+    const onScroll = () => setScrolled(window.scrollY > NOTCH_CLOSE_DISTANCE * 0.8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -54,7 +56,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4">
       <div
         className={`mx-auto flex max-w-[860px] items-center justify-between gap-4 rounded-full bg-white/75 p-1.5 pl-4 ring-1 ring-ink/[0.06] backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-500 ${
-          scrolled ? "shadow-[0_16px_40px_-16px_rgb(26_31_51/0.3)]" : "shadow-[0_8px_24px_-16px_rgb(26_31_51/0.2)]"
+          scrolled ? "shadow-[0_16px_40px_-16px_rgb(26_31_51/0.3)]" : "shadow-[0_8px_24px_-16px_rgb(26_31_51/0.12)]"
         }`}
       >
         <Logo />
