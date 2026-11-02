@@ -1,28 +1,32 @@
-import Image from "next/image";
+"use client";
+
+import Image, { type ImageLoaderProps } from "next/image";
 import type { Photo as PhotoType } from "@/lib/photos";
 
-type Props = { photo: PhotoType; sizes: string; priority?: boolean; className?: string };
+type Props = { photo: PhotoType; sizes: string; priority?: boolean; loading?: "eager" | "lazy"; className?: string };
 
-/** Photo plein cadre (le parent doit être positionné), avec le crédit du photographe. */
-export function Photo({ photo, sizes, priority, className = "" }: Props) {
+/** Les photos Unsplash sont redimensionnées par le CDN d'Unsplash lui-même (WebP/AVIF, taille exacte). */
+function unsplashLoader({ src, width, quality }: ImageLoaderProps) {
+  return `${src}&w=${width}&q=${quality ?? 75}&auto=format&fit=max`;
+}
+
+/** Photo plein cadre (le parent doit être positionné). */
+export function Photo({ photo, sizes, priority, loading, className = "" }: Props) {
   if (!photo.src) {
     return <div aria-hidden className={`absolute inset-0 bg-[linear-gradient(160deg,#cfe3f7,#e9eef6_60%,#f5f6fa)] ${className}`} />;
   }
+  const isUnsplash = photo.src.startsWith("https://images.unsplash.com/");
   return (
-    <>
-      <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} className={`object-cover ${className}`} />
-      {photo.credit && (
-        <p className="absolute right-3 bottom-3 rounded-full bg-black/35 px-2.5 py-1 text-[11px] text-white/85 backdrop-blur-sm">
-          Photo{" "}
-          <a href={photo.credit.url} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">
-            {photo.credit.name}
-          </a>{" "}
-          sur{" "}
-          <a href="https://unsplash.com/?utm_source=sovalit&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">
-            Unsplash
-          </a>
-        </p>
-      )}
-    </>
+    <Image
+      src={photo.src}
+      alt={photo.alt}
+      fill
+      sizes={sizes}
+      priority={priority}
+      loading={priority ? undefined : loading}
+      loader={isUnsplash ? unsplashLoader : undefined}
+      style={photo.color ? { backgroundColor: photo.color } : undefined}
+      className={`object-cover ${className}`}
+    />
   );
 }

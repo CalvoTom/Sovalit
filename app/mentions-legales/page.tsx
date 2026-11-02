@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { photos } from "@/lib/photos";
 
 export const metadata: Metadata = { title: "Mentions légales", alternates: { canonical: "/mentions-legales" } };
 
@@ -26,6 +27,20 @@ export default function MentionsLegales() {
       <h2>Données personnelles</h2>
       <p>Les informations transmises via le formulaire de contact sont utilisées uniquement pour répondre à votre demande et ne sont jamais cédées à des tiers. Elles sont conservées au maximum 3 ans après le dernier échange.</p>
       <p>Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données en écrivant à {site.email}.</p>
+
+      <h2>Crédits photos</h2>
+      <p>
+        Photographies issues d&apos;
+        <a className="text-electrik" href="https://unsplash.com/?utm_source=sovalit&amp;utm_medium=referral">Unsplash</a>, par{" "}
+        {Object.values(photos)
+          .filter((p) => p.credit)
+          .map((p, i, all) => (
+            <span key={p.credit!.url}>
+              <a className="text-electrik" href={p.credit!.url}>{p.credit!.name}</a>
+              {i < all.length - 1 ? ", " : "."}
+            </span>
+          ))}
+      </p>
 
       <h2>Cookies</h2>
       <p>Ce site n&apos;utilise aucun cookie de suivi ou publicitaire.</p>

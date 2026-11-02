@@ -60,29 +60,23 @@ export function Services() {
 
         <div className="relative min-h-[420px] overflow-hidden rounded-[28px] bg-givre sm:min-h-[560px]">
           {services.map((s) => (
-            <Tabs.Content key={s.id} value={s.id} forceMount className="absolute inset-0 outline-none data-[state=inactive]:pointer-events-none">
-              <AnimatePresence>
-                {s.id === active && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 1.03 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute inset-0"
-                  >
-                    {photos[s.id].src ? (
-                      <Photo photo={photos[s.id]} sizes="(min-width: 1024px) 60vw, 100vw" />
-                    ) : (
-                      <div className="flex h-full flex-col justify-end p-8 sm:p-12">
-                        <p className="font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-ink">{s.title}</p>
-                        <ul className="mt-6 grid gap-2 text-ink/80">
-                          {s.points.map((p) => <li key={p}>{p}</li>)}
-                        </ul>
-                      </div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <Tabs.Content
+              key={s.id}
+              value={s.id}
+              forceMount
+              className="absolute inset-0 outline-none transition-[opacity,scale] duration-700 ease-out-expo data-[state=active]:scale-100 data-[state=active]:opacity-100 data-[state=inactive]:pointer-events-none data-[state=inactive]:scale-[1.03] data-[state=inactive]:opacity-0"
+            >
+              {/* Toutes les photos sont chargées d'emblée : changer d'onglet est instantané */}
+              {photos[s.id].src ? (
+                <Photo photo={photos[s.id]} sizes="(min-width: 1024px) 60vw, 100vw" loading="eager" />
+              ) : (
+                <div className="flex h-full flex-col justify-end p-8 sm:p-12">
+                  <p className="font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-ink">{s.title}</p>
+                  <ul className="mt-6 grid gap-2 text-ink/80">
+                    {s.points.map((p) => <li key={p}>{p}</li>)}
+                  </ul>
+                </div>
+              )}
             </Tabs.Content>
           ))}
         </div>
