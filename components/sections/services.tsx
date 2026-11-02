@@ -29,9 +29,8 @@ export function Services() {
                 value={s.id}
                 className="group border-b border-line py-6 text-left outline-none focus-visible:bg-givre"
               >
-                <span className={`flex items-center justify-between font-display text-[1.6rem] font-semibold tracking-[-0.03em] transition-colors md:text-[1.9rem] ${isActive ? "text-ink" : "text-[#b7bccb] group-hover:text-acier"}`}>
+                <span className={`block font-display text-[1.6rem] font-semibold tracking-[-0.03em] transition-colors md:text-[1.9rem] ${isActive ? "text-ink" : "text-[#b7bccb] group-hover:text-acier"}`}>
                   {s.title}
-                  <span aria-hidden className={`size-2.5 rounded-full transition-colors ${isActive ? "bg-electrik" : "bg-transparent"}`} />
                 </span>
                 <AnimatePresence initial={false}>
                   {isActive && (
