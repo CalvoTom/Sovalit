@@ -6,17 +6,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { CheckIcon } from "@phosphor-icons/react";
 import { services, type ServiceId } from "@/lib/site";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { WebMockup } from "@/components/mockups/web-mockup";
-import { MobileMockup } from "@/components/mockups/mobile-mockup";
-import { ToolsMockup } from "@/components/mockups/tools-mockup";
-import { AIMockup } from "@/components/mockups/ai-mockup";
-
-const previews: Record<ServiceId, React.ReactNode> = {
-  web: <WebMockup />,
-  mobile: <MobileMockup />,
-  tools: <ToolsMockup />,
-  ai: <AIMockup />,
-};
+import { Photo } from "@/components/ui/photo";
+import { photos } from "@/lib/photos";
 
 export function Services() {
   const [active, setActive] = useState<ServiceId>("web");
@@ -67,25 +58,24 @@ export function Services() {
           })}
         </Tabs.List>
 
-        <div className="relative min-h-[460px] overflow-hidden rounded-[28px] bg-[linear-gradient(170deg,#cfe3f7_0%,#eef4fb_55%,#f5f6fa_100%)] sm:min-h-[540px]">
+        <div className="relative min-h-[420px] overflow-hidden rounded-[28px] bg-givre sm:min-h-[560px]">
           {services.map((s) => (
             <Tabs.Content key={s.id} value={s.id} forceMount className="absolute inset-0 outline-none data-[state=inactive]:pointer-events-none">
               <AnimatePresence>
                 {s.id === active && (
                   <motion.div
-                    initial={{ opacity: 0, y: 16, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex h-full items-center justify-center p-5 sm:p-10"
+                    initial={{ opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0"
                   >
-                    {previews[s.id]}
+                    <Photo photo={photos[s.id as ServiceId]} sizes="(min-width: 1024px) 60vw, 100vw" />
                   </motion.div>
                 )}
               </AnimatePresence>
             </Tabs.Content>
           ))}
-          <p className="absolute right-5 bottom-4 text-xs text-ink/50">Exemple d&apos;interface</p>
         </div>
       </Tabs.Root>
     </section>

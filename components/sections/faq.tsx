@@ -17,7 +17,7 @@ export function Faq() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="mb-14 text-center md:mb-16">
         <h2 className="mx-auto max-w-[18ch] text-title">Les questions qu&apos;on nous pose souvent.</h2>
-        <p className="mx-auto mt-5 max-w-[46ch]">Une autre question ? Écrivez-nous, la réponse arrive sous 24 h.</p>
+        <p className="mx-auto mt-5 max-w-[46ch] text-balance">Une autre question ? Écrivez-nous, la réponse arrive sous 24 h.</p>
       </div>
       <div className="grid items-start gap-3 md:grid-cols-2">
         {columns.map((col, c) => (
