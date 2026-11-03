@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import { LinkButton } from "@/components/ui/button";
+
+export const metadata: Metadata = { title: "Page introuvable" };
 
 export default function NotFound() {
   return (

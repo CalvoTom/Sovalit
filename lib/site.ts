@@ -4,7 +4,7 @@
 export const site = {
   name: "Sovalit",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sovalit.com",
-  title: "Sovalit — Produits digitaux, outils internes et IA sur mesure",
+  title: "Sovalit",
   description:
     "Sovalit conçoit et développe vos produits digitaux sur mesure : sites vitrines, applications mobiles privées, outils internes et solutions data et IA.",
   email: "contact@sovalit.com",

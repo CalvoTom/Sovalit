@@ -11,7 +11,7 @@ const sora = Sora({ subsets: ["latin"], weight: ["400", "500", "600", "700"], va
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: site.title, template: "%s — Sovalit" },
+  title: { default: site.title, template: "%s" },
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: site.url,
     siteName: site.name,
-    title: "Sovalit — Le digital qui fait grandir votre entreprise",
+    title: "Sovalit, le digital qui fait grandir votre entreprise",
     description: site.description,
   },
   twitter: { card: "summary_large_image" },
