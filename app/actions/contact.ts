@@ -1,9 +1,9 @@
 "use server";
 
 import { headers } from "next/headers";
-import nodemailer from "nodemailer";
 import { contactSchema, type ContactState } from "@/lib/contact-schema";
 import { site } from "@/lib/site";
+import { notifyContact } from "@/lib/notify";
 
 // Limite simple anti-abus : 5 envois par IP toutes les 10 minutes (mémoire du serveur).
 const WINDOW_MS = 10 * 60 * 1000;
@@ -41,37 +41,12 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
     return { status: "error", message: "Trop de demandes envoyées depuis cette connexion. Réessayez dans 10 minutes." };
   }
 
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO_EMAIL } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    console.error("[contact] SMTP non configuré : définissez SMTP_HOST, SMTP_USER et SMTP_PASS.");
+  const d = parsed.data;
+  const sent = await notifyContact({ ...d, company: d.company ?? "" });
+  if (sent === null) {
     return { status: "error", message: `L'envoi par formulaire n'est pas disponible. Écrivez directement à ${site.email}.` };
   }
-
-  const d = parsed.data;
-  const port = Number(SMTP_PORT ?? 465);
-  try {
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port,
-      secure: port === 465,
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
-    });
-    await transporter.sendMail({
-      from: `"Site Sovalit" <${SMTP_USER}>`,
-      to: CONTACT_TO_EMAIL || site.email,
-      replyTo: `"${d.name.replace(/"/g, "")}" <${d.email}>`,
-      subject: `Nouveau projet — ${d.name}${d.company ? ` (${d.company})` : ""}`,
-      text: [
-        `Nom : ${d.name}`,
-        `Entreprise : ${d.company || "-"}`,
-        `Email : ${d.email}`,
-        `Besoin : ${d.needs.join(", ") || "Non précisé"}`,
-        "",
-        d.message,
-      ].join("\n"),
-    });
-  } catch (err) {
-    console.error("[contact] Échec de l'envoi :", err);
+  if (!sent) {
     return { status: "error", message: `La demande n'a pas pu être envoyée. Réessayez, ou écrivez à ${site.email}.` };
   }
 

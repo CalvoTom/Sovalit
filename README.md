@@ -39,8 +39,9 @@ Dans les deux cas, renseigner les variables d'environnement dans l'onglet *Envir
 - `NEXT_PUBLIC_SITE_URL` — URL publique, ex. `https://www.sovalit.com`
 - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` — compte email qui envoie les demandes
 - `CONTACT_TO_EMAIL` — adresse qui reçoit les demandes
+- `CALLMEBOT_PHONE`, `CALLMEBOT_APIKEY` — notification WhatsApp de chaque demande (facultatif)
 
-Sans configuration SMTP, le site fonctionne mais le formulaire invite le visiteur à écrire directement par email.
+Chaque canal (email, WhatsApp) s'active dès que ses variables sont renseignées. Ils fonctionnent en parallèle : une demande est considérée comme envoyée si au moins un canal réussit. Sans aucun canal configuré, le formulaire invite le visiteur à écrire directement par email.
 
 ## Où modifier quoi
 
