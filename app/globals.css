@@ -44,6 +44,10 @@
     @apply font-display font-semibold text-ink;
     letter-spacing: -0.035em;
   }
+  /* Sections atteintes par un lien : pas de contour de focus visible */
+  section[tabindex="-1"]:focus {
+    outline: none;
+  }
   ::selection {
     @apply bg-electrik text-white;
   }

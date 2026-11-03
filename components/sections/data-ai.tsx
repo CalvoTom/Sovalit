@@ -5,7 +5,7 @@ import { ForecastChart } from "@/components/mockups/forecast-chart";
 
 export function DataAI() {
   return (
-    <section id="data" className="scroll-mt-8 px-3 sm:px-4">
+    <section id="data" className="scroll-mt-24 px-3 sm:px-4">
       <div className="rounded-[28px] bg-ink py-24 text-white/70 md:rounded-[36px] md:py-32">
         <div className="shell">
           <SectionHeading

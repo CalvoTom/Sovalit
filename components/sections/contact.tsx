@@ -4,7 +4,7 @@ import { ContactForm } from "./contact-form";
 
 export function Contact() {
   return (
-    <section id="contact" className="scroll-mt-8 px-3 pb-3 sm:px-4 sm:pb-4">
+    <section id="contact" className="scroll-mt-24 px-3 pb-3 sm:px-4 sm:pb-4">
       <div className="grid gap-12 rounded-[28px] bg-givre px-5 py-16 sm:px-8 md:rounded-[36px] md:py-24 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:px-16">
         <div className="lg:pt-4">
           <h2 className="max-w-[12ch] text-title">Parlons de votre projet.</h2>

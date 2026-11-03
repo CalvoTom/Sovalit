@@ -3,6 +3,7 @@ import { Sora } from "next/font/google";
 import "@fontsource-variable/hanken-grotesk";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { SmoothAnchors } from "@/components/smooth-anchors";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Aller au contenu
         </a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }} />
+        <SmoothAnchors />
         <Header />
         <main id="main">{children}</main>
         <Footer />
